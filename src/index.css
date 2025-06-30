@@ -1,0 +1,35 @@
+/* index.css or App.css */
+
+body.dark {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+body.dark a {
+  color: #90cdf4;
+}
+
+body.dark .contact-section,
+body.dark .experience-section,
+body.dark .contact-info,
+body.dark .contact-form {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  border-color: #333;
+}
+
+body.dark input,
+body.dark textarea {
+  background-color: #2a2a2a;
+  color: #eee;
+  border-color: #444;
+}
+
+body.dark .contact-form button {
+  background-color: #333;
+  color: white;
+}
+
+body.dark .contact-form button:hover {
+  background-color: #28a745;
+}

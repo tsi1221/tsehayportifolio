@@ -1,0 +1,23 @@
+# Node modules (for Node.js apps)
+node_modules
+
+# Logs
+*.log
+
+# Git
+.git
+.gitignore
+
+# Environment variables
+.env
+
+# OS / IDE files
+.DS_Store
+Thumbs.db
+.vscode
+*.swp
+
+# Build outputs
+build
+dist
+coverage

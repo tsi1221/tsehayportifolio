@@ -1,0 +1,90 @@
+/* Navbar container */
+.navbar {
+  background-color: #FFF5E1; /* Cream (Primary background) */
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  color: #333333; /* Charcoal text */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+/* Inner layout */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo image - now circular */
+.navbar-logo {
+  height: 48px;
+  width: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #05b383; ; /* Rose Gold border */
+  box-shadow: 0 2px 6px rgba(183, 110, 121, 0.3);
+  transition: transform 0.3s ease;
+}
+
+/* Logo link */
+.navbar-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: #111a2ca4; /* Dark Slate */
+}
+
+.navbar-logo-link:hover .navbar-logo {
+  transform: scale(1.08);
+}
+
+.navbar-logo-link h1 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color:#4158bed2; /* Rose Gold */
+  font-family: 'Segoe UI', sans-serif;
+  letter-spacing: 1px;
+}
+
+/* Navigation links */
+.navbar-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #0756a0; /* Charcoal */
+  position: relative;
+  padding: 0.4rem 0.6rem;
+  transition: all 0.3s ease;
+}
+
+/* Hover underline and scale effect */
+.navbar-links a::after {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 3px;
+  background-color: #C8A2C8; /* Soft Lavender accent */
+  transition: width 0.3s ease;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.navbar-links a:hover {
+  color: #39a85e; /* Dusty Pink */
+  transform: scale(1.05);
+}
+
+.navbar-links a:hover::after {
+  width: 100%;
+}

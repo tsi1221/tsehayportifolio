@@ -1,0 +1,50 @@
+/* Transparent Dark Mode Styles */
+body.dark {
+  background-color: rgba(18, 18, 18, 0.95);
+  color: #f1f1f1;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark a {
+  color: #90cdf4;
+}
+
+body.dark .contact-section,
+body.dark .experience-section {
+  background-color: rgba(30, 30, 30, 0.7);
+  color: #f1f1f1;
+  border-radius: 12px;
+  padding: 1rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .contact-info,
+body.dark .contact-form {
+  background-color: rgba(40, 40, 40, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+body.dark input,
+body.dark textarea {
+  background-color: rgba(60, 60, 60, 0.5);
+  color: #1e408a;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+}
+
+body.dark .contact-form button {
+  background-color: rgba(70, 70, 70, 0.6);
+  color: rgb(7, 9, 148);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+body.dark .contact-form button:hover {
+  background-color: rgba(40, 167, 69, 0.9); /* #28a745 with transparency */
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+}

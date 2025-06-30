@@ -1,0 +1,44 @@
+/* Blog.css */
+
+.blog-section {
+  max-width: 700px;
+  margin: 4rem auto;
+  padding: 1.5rem 1rem;
+  background-color: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(90, 42, 131, 0.1);
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #3a3a3a;
+}
+
+.section-title2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #5a2a83;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.blog-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+  margin-top: 0;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 480px) {
+  .blog-section {
+    margin: 3rem 1rem;
+    padding: 1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .blog-section p {
+    font-size: 1rem;
+  }
+}

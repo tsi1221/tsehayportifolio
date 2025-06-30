@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devportfolio-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devportfolio
+  template:
+    metadata:
+      labels:
+        app: devportfolio
+    spec:
+      containers:
+        - name: devportfolio
+          image: tbiruh1221/devprofolioo-frontend:latest
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          volumeMounts:
+            - name: ssl-certs
+              mountPath: /etc/nginx/ssl
+              readOnly: true
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d
+              readOnly: true
+      volumes:
+        - name: ssl-certs
+          secret:
+            secretName: devprofolioo-tls
+        - name: nginx-config
+          configMap:
+            name: nginx-config

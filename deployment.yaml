@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devprofolioo-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devprofolioo-frontend
+  template:
+    metadata:
+      labels:
+        app: devprofolioo-frontend
+    spec:
+      containers:
+      - name: devprofolioo-frontend
+        image: tbiruh1221/devprofolioo-frontend:latest
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"

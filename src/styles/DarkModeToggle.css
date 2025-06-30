@@ -1,0 +1,13 @@
+/* styles/DarkModeToggle.css */
+.darkmode-toggle { position: fixed; 
+    bottom: 1rem;
+     right: 1rem; 
+     background: #333;
+      color: white; 
+      border: none;
+       padding: 0.5rem 1rem; 
+       border-radius: 8px; 
+       cursor: pointer; 
+    }
+.darkmode-toggle:hover { 
+    background: #555; }

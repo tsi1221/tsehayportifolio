@@ -1,0 +1,73 @@
+.experience-section {
+  padding: 4rem 2rem;
+  background-image: url("https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1350&q=80");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  position: relative;
+  min-height: 75.9vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.experience-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* dark overlay */
+  z-index: 0;
+}
+
+.section-titleE {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  margin-top: -2rem;
+  position: relative;
+  z-index: 1;
+  color: #00ffc8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.experience-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.experience-item {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 1.2rem 2rem;
+  border-left: 5px solid #00ffc8;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  color: #ffffff;
+  font-weight: 500;
+  text-align: left;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.experience-item:hover {
+  transform: translateX(10px);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.experience-role {
+  display: block;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
