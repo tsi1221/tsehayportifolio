@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: devportfolio-deployment
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: devportfolio
@@ -26,16 +26,10 @@ spec:
               cpu: "500m"
               memory: "256Mi"
           volumeMounts:
-            - name: ssl-certs
-              mountPath: /etc/nginx/ssl
-              readOnly: true
             - name: nginx-config
               mountPath: /etc/nginx/conf.d
               readOnly: true
       volumes:
-        - name: ssl-certs
-          secret:
-            secretName: devprofolioo-tls
         - name: nginx-config
           configMap:
             name: nginx-config

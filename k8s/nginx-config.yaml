@@ -5,20 +5,12 @@ metadata:
 data:
   default.conf: |
     server {
-      listen 443 ssl;
+      listen 80;
       server_name localhost;
-
-      ssl_certificate ssl/tls.crt;
-      ssl_certificate_key ssl/tls.key;
 
       location / {
           root /usr/share/nginx/html;
-          try_files $uri /index.html;
+          index index.html;
+          try_files $uri $uri/ /index.html;
       }
-    }
-
-    server {
-      listen 80;
-      server_name localhost;
-      return 301 https://$host$request_uri;
     }
