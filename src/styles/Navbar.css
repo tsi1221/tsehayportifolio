@@ -88,3 +88,56 @@
 .navbar-links a:hover::after {
   width: 100%;
 }
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+  }
+
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #0756a0;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: 72px; /* adjust based on navbar height */
+    left: 0;
+    width: 100%;
+    background-color: #FFF5E1;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 1rem 0;
+    transform: translateY(-200%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+  }
+
+  .navbar-links.active {
+    transform: translateY(0%);
+  }
+
+  .navbar-links li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar-links a {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 0;
+  }
+}

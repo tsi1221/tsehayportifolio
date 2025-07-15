@@ -1,44 +1,69 @@
-/* Blog.css */
-
-.blog-section {
-  max-width: 700px;
-  margin: 4rem auto;
-  padding: 1.5rem 1rem;
-  background-color: #fafafa;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(90, 42, 131, 0.1);
-  text-align: center;
+/* Blog Section */
+.ssblog-section {
+  padding: 4rem 2rem;
+  background-color: #fdfdfd;
+  color: #2c3e50;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #3a3a3a;
+  text-align: center;
+  min-height: 60vh;
 }
 
+/* Section Title */
 .section-title2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #5a2a83;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  position: relative;
+  display: inline-block;
+  color: #34495e;
 }
 
-.blog-section p {
-  font-size: 1.1rem;
-  line-height: 1.6;
+.section-title2::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #9b59b6);
+  margin: 0.5rem auto;
+  border-radius: 2px;
+}
+
+/* Blog Description Paragraph */
+.ssblog-section p {
+  font-size: 1.2rem;
   color: #555;
-  margin-top: 0;
+  max-width: 700px;
+  margin: 0 auto 2rem auto;
+  line-height: 1.7;
 }
 
-/* Responsive for smaller screens */
-@media (max-width: 480px) {
-  .blog-section {
-    margin: 3rem 1rem;
-    padding: 1rem;
-  }
+/* Upcoming post area */
+.ssblog-section div {
+  background-color: #f4f6f8;
+  border: 1px dashed #ccc;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 2rem auto;
+}
 
-  .section-title {
+.ssblog-section div p {
+  font-size: 1rem;
+  color: #777;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-title2 {
     font-size: 2rem;
   }
 
-  .blog-section p {
+  .ssblog-section p {
     font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .ssblog-section div {
+    padding: 1.5rem;
   }
 }

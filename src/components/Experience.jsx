@@ -4,7 +4,7 @@ const experiences = [
   "5-month Internship at INSA",
   "Upwork freelance projects",
   "Hackathon Winner",
-  "Learning at Jimma University (Software Engineering)",
+  "Learning at Jimma University for 5 years (Software Engineering)",
   "Empowerher Training UI/UX",
   "LEAP Africa Leadership Training (6 months)",
   "Nigeria Tech4Dev Training (12 months)",

@@ -1,7 +1,8 @@
+/* Home section */
 .home-section {
   min-height: 82.6vh;
   padding: 2rem;
-  margin: 0; /* corrected from 'marigin' typo */
+  margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,48 +31,47 @@
   z-index: 0;
 }
 
+/* Title */
 .home-title {
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: bold;
-  color: #ffd166; /* warm yellow */
-  margin-top:-6rem;
-  position: fixed;
-  margin-top:-9rem;
+  color: #ffd166;
+  margin-top: 1rem;
   z-index: 1;
   text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+  position: relative;
 }
 
+/* Subtitle */
 .home-subtitle {
   font-size: clamp(1rem, 3vw, 1.4rem);
   color: #eee;
   max-width: 600px;
-  /* margin-top:-6rem; */
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 1.5rem;
   padding: 1rem 1.5rem;
-  background: rgba(28, 28, 28, 0.75);
+  background: rgba(8, 12, 134, 0.212);
   border-radius: 10px;
-  z-index: 2;
+  z-index: 1;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+  position: relative;
 }
 
+/* Social Links */
 .home-links {
-  position: fixed;
+  margin-top: 2.5rem;
   z-index: 1;
   display: flex;
-  padding: 2rem;
-  gap: 2.5rem;
-  margin-top:4rem ;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 2rem;
+  position: relative;
   max-width: 90vw;
 }
 
+/* Buttons */
 .btn {
-  background-color: #0683d6f6; /* fresh teal */
+  background-color: #0683d6f6;
   color: white;
   padding: 0.8rem 2rem;
   border-radius: 50px;
@@ -87,12 +87,10 @@
   border: 2px solid transparent;
   transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
-p{
-  font-size:1.5rem;
-}
+
 .btn:hover,
 .btn:focus {
-  background-color: #05b383; /* darker teal */
+  background-color: #05b383;
   box-shadow: 0 6px 15px rgba(5, 179, 131, 0.6);
   transform: translateY(-3px);
   border-color: #0fffd0;
@@ -104,13 +102,20 @@ p{
   box-shadow: 0 3px 7px rgba(5, 179, 131, 0.4);
 }
 
-/* Responsive adjustments */
+/* Optional enhancement for touchscreen users */
 @media (hover: none) and (pointer: coarse) {
   .btn {
     padding: 1rem 2.5rem;
     font-size: 1.3rem;
   }
 }
+
+/* Typography fix */
+p {
+  font-size: 1.5rem;
+}
+
+/* Animation keyframes */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -134,5 +139,47 @@ p{
   opacity: 1;
 }
 
+.fade-in-3 {
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 2s;
+  opacity: 1;
+}
 
+/* ✅ Responsive Styling */
+@media (max-width: 600px) {
+  .home-section {
+    padding: 1rem;
+    background-attachment: scroll; /* improves mobile performance */
+  }
 
+  .home-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .home-subtitle {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+    background: rgba(13, 35, 160, 0.342);
+  }
+
+  .home-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 0.7rem 2rem;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+}

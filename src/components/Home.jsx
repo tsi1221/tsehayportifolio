@@ -3,9 +3,13 @@ import "../styles/Home.css";
 export default function Home() {
   return (
     <section className="home-section">
-      <h1 className="home-title fade-in-1" >  Hi, I'm Tsehaynesh Biruh
-        <br /> <p className="fade-in-2">I am FullStack/DevOps/UI/UX Developer </p>
-      </h1>
+      <h1 className="home-title fade-in-1">
+  Hi, I'm Tsehaynesh Biruh
+</h1>
+<p className="home-subtitle fade-in-2">
+  I am FullStack / DevOps / UI / UX Developer
+</p>
+
       
       <div className="home-links fade-in-3">
         <a href="https://github.com/tsi1221" target="_blank" rel="noreferrer" aria-label="GitHub Profile" className="btn">
