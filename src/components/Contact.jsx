@@ -19,7 +19,7 @@ export default function Contact() {
 
         <div className="contact-info">
           <p><strong>Telegram:</strong> @ts_e_ha_y_nesh</p>
-          <p><strong>Phone:</strong> 0928505904</p>
+          <p><strong>Phone:</strong> +251928505904</p>
           <p><strong>Email:</strong> <a href="mailto:tsehayneshbiruh2@gmail.com">tsehayneshbiru2@gmail.com</a></p>
           <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/tsehaynesh-biruh-8681852a4/" target="_blank" rel="noreferrer">tsehaynesh-biruh</a></p>
           <p><strong>Location:</strong> Addis Ababa, Ethiopia</p>
