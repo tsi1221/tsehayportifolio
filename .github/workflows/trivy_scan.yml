@@ -19,26 +19,30 @@ jobs:
 
       - name: 🕒 Set Date
         id: set-date
-        run: echo "DATE=$(date +%m.%d.%Y)" >> $GITHUB_ENV
-
-      - name: 📁 Create output directory
-        run: mkdir -p "GitHub Actions/Trivy Automation"
+        run: echo "DATE=$(date +%Y-%m-%d)" >> $GITHUB_ENV
 
       - name: 🐳 Build Docker image
+        id: build-image
         run: docker build -t devprofolioo-frontend:latest .
-
+        
       - name: 📦 Install Trivy
         run: |
           sudo apt-get update
-          sudo apt-get install -y curl
-          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin v0.57.0
+          sudo apt-get install -y wget
+          wget https://github.com/aquasecurity/trivy/releases/download/v0.57.0/trivy_0.57.0_Linux-64bit.deb
+          sudo dpkg -i trivy_0.57.0_Linux-64bit.deb
 
       - name: 📥 Download Trivy DB
         run: trivy image --download-db-only
 
-      - name: 🔐 Run Trivy on devprofolioo-frontend
+      - name: 🔐 Run Trivy Scan
+        id: trivy-scan
         run: |
-          OUTPUT_FILE="GitHub Actions/Trivy Automation/scan-results-${DATE}.json"
+          OUTPUT_DIR="$GITHUB_WORKSPACE/trivy-results"
+          mkdir -p "$OUTPUT_DIR"
+          OUTPUT_FILE="$OUTPUT_DIR/scan-results-${DATE}.json"
+          
+          echo "Running Trivy scan..."
           trivy image \
             --format json \
             --ignore-unfixed \
@@ -46,12 +50,43 @@ jobs:
             --severity CRITICAL,HIGH,MEDIUM,LOW \
             -o "$OUTPUT_FILE" \
             devprofolioo-frontend:latest
+          
+          echo "Scan completed. Results saved to: $OUTPUT_FILE"
+          echo "results_path=$OUTPUT_FILE" >> $GITHUB_OUTPUT
 
-      - name: ✅ Verify output file exists
-        run: ls -l "GitHub Actions/Trivy Automation/"
+      - name: 🔍 Verify Scan Results
+        run: |
+          RESULTS_FILE="${{ steps.trivy-scan.outputs.results_path }}"
+          echo "Verifying file at: $RESULTS_FILE"
+          ls -la "$(dirname "$RESULTS_FILE")"
+          echo "First 5 lines:"
+          head -n 5 "$RESULTS_FILE"
+          echo "Vulnerability count:"
+          jq '[.Results[].Vulnerabilities[]?.Severity] | group_by(.)[] | {severity: .[0], count: length}' "$RESULTS_FILE"
 
-      - name: 📤 Upload Trivy scan report (FREE)
+      - name: 📝 Print Summary Table
+        run: |
+          trivy image \
+            --format table \
+            --ignore-unfixed \
+            devprofolioo-frontend:latest
+
+      - name: 📤 Upload Scan Report
         uses: actions/upload-artifact@v4
         with:
           name: trivy-scan-report
-          path: GitHub Actions/Trivy Automation/scan-results-${{ env.DATE }}.json
+          path: ${{ steps.trivy-scan.outputs.results_path }}
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: 🚨 Fail on Critical Vulnerabilities
+        run: |
+          RESULTS_FILE="${{ steps.trivy-scan.outputs.results_path }}"
+          CRITICAL_COUNT=$(jq '[.Results[].Vulnerabilities[]? | select(.Severity == "CRITICAL")] | length' "$RESULTS_FILE")
+          
+          if [ "$CRITICAL_COUNT" -gt 0 ]; then
+            echo "::error::Found $CRITICAL_COUNT CRITICAL vulnerabilities!"
+            exit 1
+          else
+            echo "No CRITICAL vulnerabilities found"
+          fi
