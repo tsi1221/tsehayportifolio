@@ -50,12 +50,8 @@ jobs:
       - name: ✅ Verify output file exists
         run: ls -l "GitHub Actions/Trivy Automation/"
 
-      - name: 💾 Commit scan results to repo
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add "GitHub Actions/Trivy Automation/scan-results-${DATE}.json"
-          git commit -m "Add Trivy scan results (${DATE})"
-          git push https://x-access-token:${PAT_TOKEN}@github.com/tsi1221/tsehayneshBiruh.git HEAD:main
+      - name: 📤 Upload Trivy scan report (FREE)
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-scan-report
+          path: GitHub Actions/Trivy Automation/scan-results-${{ env.DATE }}.json
