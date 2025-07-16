@@ -1,6 +1,6 @@
 /* Home section */
 .home-section {
-  min-height: 82.6vh;
+  min-height: 100vh;
   padding: 2rem;
   margin: 0;
   display: flex;
@@ -102,14 +102,6 @@
   box-shadow: 0 3px 7px rgba(5, 179, 131, 0.4);
 }
 
-/* Optional enhancement for touchscreen users */
-@media (hover: none) and (pointer: coarse) {
-  .btn {
-    padding: 1rem 2.5rem;
-    font-size: 1.3rem;
-  }
-}
-
 /* Typography fix */
 p {
   font-size: 1.5rem;
@@ -145,16 +137,15 @@ p {
   opacity: 1;
 }
 
-/* ✅ Responsive Styling */
+/* Responsive Styling */
 @media (max-width: 600px) {
   .home-section {
     padding: 1rem;
-    background-attachment: scroll; /* improves mobile performance */
+    background-attachment: scroll; /* better on mobile */
   }
 
   .home-title {
     font-size: 2rem;
-    text-align: center;
     margin-top: 1rem;
   }
 
