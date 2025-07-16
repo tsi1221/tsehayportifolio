@@ -1,4 +1,4 @@
-name: 🔍 Trivy Image Vulnerability Scan
+name: 🔍 Trivy Docker Image Security Scan
 
 on:
   push:
@@ -11,16 +11,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout repo
+      # Step 1: Checkout the source code
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
+      # Step 2: Build the Docker image
       - name: 🐳 Build Docker image
         run: docker build -t devprofolioo-frontend:latest .
 
-      - name: 🔐 Run Trivy to scan image
+      # Step 3: Run Trivy vulnerability scan
+      - name: 🔐 Scan Docker image with Trivy
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: devprofolioo-frontend:latest
           format: table
-          exit-code: 1  # use 0 if you want the workflow to pass anyway
+          exit-code: 1  # Fail the workflow if vulnerabilities are found
           severity: CRITICAL,HIGH
+
+      # Optional: Save scan report to a file
+      - name: 📝 Save Trivy scan output
+        run: |
+          trivy image --severity CRITICAL,HIGH --format table -o trivy-report.txt devprofolioo-frontend:latest
+
+      # Optional: Upload the scan report as an artifact
+      - name: 📤 Upload Trivy scan report
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-report
+          path: trivy-report.txt
