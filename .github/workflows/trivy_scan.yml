@@ -15,12 +15,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 🐳 Build Docker image
-        run: docker build -t hospital-app:latest .
+        run: docker build -tdevprofolioo-frontend:latest 
 
       - name: 🔐 Run Trivy to scan image
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: hospital-app:latest
+          image-ref: devprofolioo-frontend:latest
           format: table
           exit-code: 1
           severity: CRITICAL,HIGH
