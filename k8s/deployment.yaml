@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: devportfolio
-    spec:
+    spec:                  
       containers:
         - name: devportfolio
           image: tbiruh1221/devprofolioo-frontend:latest

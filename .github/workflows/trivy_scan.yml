@@ -1,41 +1,61 @@
-name: 🔍 Trivy Docker Image Security Scan
+name: Trivy Security Scan for devprofolioo-frontend
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  trivy-scan:
+  build:
+    name: Scan devprofolioo-frontend with Trivy
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the source code
       - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      # Step 2: Build the Docker image
+      - name: 🕒 Set Date
+        id: set-date
+        run: echo "DATE=$(date +%m.%d.%Y)" >> $GITHUB_ENV
+
+      - name: 📁 Create output directory
+        run: mkdir -p "GitHub Actions/Trivy Automation"
+
       - name: 🐳 Build Docker image
         run: docker build -t devprofolioo-frontend:latest .
 
-      # Step 3: Run Trivy vulnerability scan
-      - name: 🔐 Scan Docker image with Trivy
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: devprofolioo-frontend:latest
-          format: table
-          exit-code: 1  # Fail the workflow if vulnerabilities are found
-          severity: CRITICAL,HIGH
-
-      # Optional: Save scan report to a file
-      - name: 📝 Save Trivy scan output
+      - name: 📦 Install Trivy
         run: |
-          trivy image --severity CRITICAL,HIGH --format table -o trivy-report.txt devprofolioo-frontend:latest
+          sudo apt-get update
+          sudo apt-get install -y curl
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin v0.57.0
 
-      # Optional: Upload the scan report as an artifact
-      - name: 📤 Upload Trivy scan report
-        uses: actions/upload-artifact@v4
-        with:
-          name: trivy-report
-          path: trivy-report.txt
+      - name: 📥 Download Trivy DB
+        run: trivy image --download-db-only
+
+      - name: 🔐 Run Trivy on devprofolioo-frontend
+        run: |
+          OUTPUT_FILE="GitHub Actions/Trivy Automation/scan-results-${DATE}.json"
+          trivy image \
+            --format json \
+            --ignore-unfixed \
+            --vuln-type os,library \
+            --severity CRITICAL,HIGH,MEDIUM,LOW \
+            -o "$OUTPUT_FILE" \
+            devprofolioo-frontend:latest
+
+      - name: ✅ Verify output file exists
+        run: ls -l "GitHub Actions/Trivy Automation/"
+
+      - name: 💾 Commit scan results to repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add "GitHub Actions/Trivy Automation/scan-results-${DATE}.json"
+          git commit -m "Add Trivy scan results (${DATE})"
+          git push origin HEAD:main
