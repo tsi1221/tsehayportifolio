@@ -1,0 +1,26 @@
+name: 🔍 Trivy Image Vulnerability Scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 🐳 Build Docker image
+        run: docker build -t hospital-app:latest .
+
+      - name: 🔐 Run Trivy to scan image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: hospital-app:latest
+          format: table
+          exit-code: 1
+          severity: CRITICAL,HIGH
